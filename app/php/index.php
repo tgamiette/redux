@@ -9,6 +9,5 @@ use App\Framework\Router\Router;
 session_start();
 require 'vendor/autoload.php';
 
-
 $router = new Router();
 $router->getController();

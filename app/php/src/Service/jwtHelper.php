@@ -28,7 +28,7 @@ class jwtHelper {
 			'name' => $user->getName(),
 			'id' => $user->getId(),
 			'password' => $user->getPassword(),
-			'exp' => time() + 100,
+			'exp' => time() + 200,
 			'iat' => time(),
 		];
 		

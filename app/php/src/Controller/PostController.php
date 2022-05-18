@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Framework\Database\PDOFactory;
-use App\Manager\PostManager;
+use App\Manager\FilmManager;
 
 class PostController extends BaseController
 {
@@ -12,7 +12,7 @@ class PostController extends BaseController
      */
     public function getIndex()
     {
-        $postManager=new PostManager();
+        $postManager=new FilmManager();
         $posts=$postManager->getAllPost();
         $this->render('Home'
     );

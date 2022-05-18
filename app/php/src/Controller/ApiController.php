@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 
-use App\Entity\Post;
+use App\Entity\Film;
+use App\Entity\Review;
 use App\Entity\User;
-use App\Manager\PostManager;
+use App\Manager\FilmManager;
 use App\Manager\UserManager;
 use App\Service\jwtHelper;
 use Firebase\JWT\JWK;
@@ -15,7 +16,7 @@ class ApiController extends BaseController {
 //Récuperation d'un post
 	public function getPost($params) {
 		$id = (int)$params['id'];
-		$postManager = new PostManager();
+		$postManager = new FilmManager();
 		if ($id === 0) {
 			$posts = $postManager->findAll();
 		}
@@ -34,7 +35,7 @@ class ApiController extends BaseController {
 	public function getUser($params) {
 		$this->checkAccess();
 		$id = (int)$params['id'];
-		$postManager = new PostManager();
+		$postManager = new FilmManager();
 		if ($id == 0) {
 			$posts = $postManager->findAll();
 		}
@@ -104,13 +105,13 @@ class ApiController extends BaseController {
 		$this->renderJSON($jwt);
 	}
 
-//Envoyer un post
-	public function postPost($params) {
+//ajouter un film un post
+	public function postFilm($params) {
 		if (isset($_COOKIE['token'])) {
 			$token = $_COOKIE['token'];
 			$user = $this->checkAccess($token);
-			$postManager = new PostManager();
-			$post = new Post($_POST);
+			$postManager = new FilmManager();
+			$post = new Film($_POST);
 			$post->setAuthorId($user->getId());
 			
 			if ($postManager->addPost($post)) {
@@ -129,24 +130,33 @@ class ApiController extends BaseController {
 			}
 		}
 	}
-//  }
-//  public function putUser($params)
-//  {
-//    parse_str(file_get_contents("php://input"), $_PUT);
-//    $id = (int)$params['id'];
-//
-//    if ($id == 0 || empty($_PUT['author']) || empty($_PUT['content']) || empty($_PUT['publishedAt']) || empty($_PUT['title'])) {
-//      $this->renderJSON("il manque l'id ou des paramètres");
-//    } else {
-//      $userManager = new UserManager();
-//      $user = $userManager->findById($id);
-//
-//      $result = $userManager->update($user);
-//      if ($result) {
-//        $this->renderJSON("Mise a jour Ok");
-//      } else {
-//        $this->renderJSON("Mise a jour KOOOOOO");
-//      }
-//    }
-//  }
+  
+  //ajouter une review
+	public function postReview ($params) {
+		if (isset($_COOKIE['token']) || $params) {
+			$token = $_COOKIE['token'];
+			$user = $this->checkAccess($token);
+			$filmManager = new FilmManager();
+			$filmManager = new Rev();
+			$film = $filmManager->getFilmById($params['id']);
+			$review = new Review($_POST);
+      $review->setAuthor($user);
+      $review->setFilm($film->getId());
+			
+			if ($filmManager->addFilm($review)) {
+				header("connexion Ok", true, 200);
+				$this->renderJSON([
+					'status' => 200,
+					'message' => "ajout ok "
+				]);
+			}
+			else {
+				header("connexion ko ", true, 400);
+				$this->renderJSON([
+					'status' => 402,
+					'message' => "Ajout Ko"
+				], 403);
+			}
+		}
+	}
 }

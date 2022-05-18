@@ -6,7 +6,7 @@ use App\Entity\Author;
 use App\Framework\Actions\Password;
 use App\Framework\Session\Session;
 
-class AuthorManager extends BaseManager
+class AuhtorManager extends BaseManager
 {
   public function findAll(): array
   {
