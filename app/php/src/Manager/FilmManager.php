@@ -6,10 +6,6 @@ use App\Entity\Film;
 
 class FilmManager extends BaseManager {
   
-  /**
-   * @param int $id
-   * @return Film|bool
-   */
   public function getFilmById(int $id) {
     $sql = "SELECT  * FROM `film`  WHERE (ìd = :id)";
     $request = $this->db->prepare($sql);

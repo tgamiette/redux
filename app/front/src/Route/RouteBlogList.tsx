@@ -1,9 +1,9 @@
 import {SetStateAction, useEffect, useState} from "react";
 import {BlogInterface} from "../Interface/ResponseInterfaces";
-import useGetBlogList from "../Hook/useGetBlogList";
+import useGetFilms from "../Hook/useGetFilms";
 import BlogList from "../Components/BlogList";
 
-const getBlogList = useGetBlogList();
+const getBlogList = useGetFilms();
 
 
 export default function RouteBlogList() {

@@ -5,13 +5,13 @@ namespace App\Entity;
 use DateTime;
 
 class Film extends BaseEntity {
-  private int $id;
-  private string $title;
-  private DateTime $createdAt;
-  private string $content;
-  private string $author;
-  private string $image;
-  private string $actors;
+  public int $id;
+  public string $title;
+  public string $createdAt;
+  public string $content;
+  public string $author;
+  public string $image;
+  public string $actors;
   
   public function __construct($arr) {
     parent::__construct($arr);
@@ -25,9 +25,15 @@ class Film extends BaseEntity {
   }
   
   /**
+   * @param string $createdAt
+   */
+  public function setCreatedAt(string $createdAt): void {
+    $this->createdAt = $createdAt;
+  }
+  /**
    * @param DateTime $createdAt
    */
-  public function setCreatedAt(DateTime $createdAt): void {
+  public function setCreatedAtObject(DateTime $createdAt): void {
     $this->createdAt = $createdAt;
   }
   
@@ -81,7 +87,7 @@ class Film extends BaseEntity {
   /**
    * @param string $author
    */
-  public function setActor(string $actor): void {
+  public function setActors(string $actor): void {
     $this->actors = $actor;
   }
   

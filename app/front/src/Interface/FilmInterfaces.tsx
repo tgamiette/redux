@@ -3,8 +3,8 @@ export interface FilmInterface {
     title: string,
     content: string,
     url: string,
-    from: string,
-    created_at: string,
+    author: string,
+    createdAt: string,
     actor: string,
     image:string
 }

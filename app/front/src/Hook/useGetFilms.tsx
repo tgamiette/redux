@@ -2,13 +2,12 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import API from './axios';
 
-export default function useGetBlogList(): Function {
+export default function useGetFilms(): Function {
 
 
     return (): Promise<any> => {
-        return API.get('post')
+        return API.get('film')
             .then(response => {
-                    console.log(response);
                     return response.data.value
                 }
             );

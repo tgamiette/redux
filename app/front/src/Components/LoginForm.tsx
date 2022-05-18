@@ -7,7 +7,7 @@ interface LoginFormPropsInterface {
     setNeedsLogin: React.Dispatch<boolean>
 }
 
-export default function LoginForm({setLocalUser, needsLogin, setNeedsLogin}: LoginFormPropsInterface) {
+export default function LoginForm() {
     const [formInput, setFormInput] = useState<LocalUserInterface>({password: "", username: ""})
 
     const handleChange = ({target}: any) => {
@@ -19,7 +19,8 @@ export default function LoginForm({setLocalUser, needsLogin, setNeedsLogin}: Log
 
     const handleSubmit  = async (e: any) => {
         e.preventDefault();
-        setLocalUser(formInput);
+
+        // setLocalUser(formInput);
     }
 
     return (
