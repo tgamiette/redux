@@ -25,7 +25,7 @@ class jwtHelper {
 		
 		$payload = [
 			'iss' => 'http://localhots:1234',
-			'name' => $user->getName(),
+			'username' => $user->getUsername(),
 			'id' => $user->getId(),
 			'password' => $user->getPassword(),
 			'exp' => time() + 200,
@@ -60,7 +60,7 @@ class jwtHelper {
 
 	}
 	
-	public function decode($token) {
+	public function decode($token): \stdClass {
 		
 		$jwt = $token;
 		$key = file_get_contents('./privateKey');

@@ -7,13 +7,15 @@ use App\Entity\User;
 class UserManager extends BaseManager {
   
   public function add(User $user) {
-    $sql = "INSERT INTO `user` (`name`,`password`, `lastname`, `email`) VALUES (:name, :password , :lastname , :phone);";
+    $sql = "INSERT INTO `user` (`username`,`password`) VALUES (:username, :password);";
     $request = $this->db->prepare($sql);
     
-    $request->bindValue(':lastname', $user->getName());
+    $request->bindValue(':username', $user->getUsername());
     $request->bindValue(':password', $user->getPassword());
-    $request->bindValue(':name', $user->getName());
-    $request->bindValue(':email', $user->getEmail());
+
+//    $request->bindValue(':lastname', $user->getName());
+//    $request->bindValue(':name', $user->getName());
+//    $request->bindValue(':email', $user->getEmail());
     
     return $request->execute();
   }
@@ -44,7 +46,7 @@ class UserManager extends BaseManager {
     $query = $this->db->query($sql);
     $result = $query->fetchAll(\PDO::FETCH_ASSOC);
     
-    foreach ($result as $index=>$user) {
+    foreach ($result as $index => $user) {
       $result[$index] = new User($user);
     }
     
@@ -52,15 +54,18 @@ class UserManager extends BaseManager {
   }
   
   public function checkLogin(array $array) {
-    $sql = "SELECT  * FROM user  WHERE `name`=:name AND `password` = :password";
+    $sql = "SELECT  * FROM user  WHERE (`username`=:username AND `password` = :password)";
     
     $request = $this->db->prepare($sql);
-    $request->bindValue(':name', $array['name']);
+    $request->bindValue(':username', $array['username']);
     $request->bindValue(':password', $array['password']);
-    
     $request->execute();
-
-    return  new User($request->fetch(\PDO::FETCH_ASSOC));
+    $result = $request->fetch(\PDO::FETCH_ASSOC);
+    if ($result) {
+      return new User($result);
+    }
+    return false;
+    
   }
   
   public function findById($idUser) {

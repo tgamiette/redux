@@ -8,6 +8,8 @@ class User extends BaseEntity {
   protected string $email;
   protected string $name;
   protected string $lastname;
+  protected string $username;
+  
   protected string $password;
   
   /**
@@ -66,5 +68,19 @@ class User extends BaseEntity {
    */
   public function setPassword(string $password): void {
     $this->password = $password;
+  }
+  
+  /**
+   * @return string
+   */
+  public function getUsername(): string {
+    return $this->username;
+  }
+  
+  /**
+   * @param string $username
+   */
+  public function setUsername(string $username): void {
+    $this->username = $username;
   }
 }

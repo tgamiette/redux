@@ -3,13 +3,17 @@ import {LocalBlogPost} from "../Interface/LocalBlogPost";
 import API from "./axios"
 import * as jose from 'jose'
 import {FilmInterface} from "../Interface/FilmInterfaces";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
+import * as FilmAction from "../Redux/actions/FilmAction";
+import {useDispatch} from "react-redux";
 
 
-export default function usePostBlogFrom(): Function {
+export default function usePostFilm(): Function {
 
-    const myHeaders = new Headers();
-    const cookies = new Cookies();
-
+    const myHeaders = new Headers()
+    const cookies = new Cookies()
+    const dispatch = useDispatch()
     return (film: FilmInterface) => {
         // API.interceptors.request.use(request => {
         //     const jwt = cookies.get('token')
@@ -27,20 +31,21 @@ export default function usePostBlogFrom(): Function {
         //     return request
         // })
 
-        var params = new URLSearchParams();
+        const params = new URLSearchParams();
         params.append('title', film.title);
-        params.append('from', film.from);
+        params.append('author', film.author);
         params.append('content', film.content);
-        params.append('actor', film.actor);
+        params.append('actors', film.actor);
         params.append('image', film.image);
-        params.append('url', film.url);
-        params.append('created_at', film.created_at);
-
-        return API.post('post', params)
+        params.append('createdAt', film.createdAt);
+        return API.post('film', params)
             .then(response => {
-                    // console.log(response)
+                    console.log(response)
+                    dispatch(FilmAction.addFilm(film))
                 }
-            );
+            ).catch(error => {
+                console.log(error)
+                return error
+            });
     }
-
 }

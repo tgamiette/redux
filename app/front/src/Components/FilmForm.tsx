@@ -1,23 +1,23 @@
 import React, {useState} from "react";
-import {LocalBlogPost} from "../Interface/LocalBlogPost";
-import usePostBlog from "../Hook/usePostBlog";
-import {BlogInterface, LoginResponseInterface} from "../Interface/ResponseInterfaces";
-import {FilmInterface} from "../Interface/FilmInterfaces";
-import {useDispatch} from "react-redux";
-import {AddFilm} from "../Actions/FilmAction";
 
-interface BlogFormPropsInterface {
-    loggedUser: LoginResponseInterface,
-    setNeedsUpdate: React.Dispatch<boolean>
-}
+import {FilmInterface} from "../Interface/FilmInterfaces";
+import {useDispatch, useSelector} from "react-redux";
+import {addFilm} from "../Redux/actions/FilmAction";
+import {selectSigning} from "../Redux/Selector";
+import usePostFilm from "../Hook/usePostFilm";
 
 export default function FilmForm() {
     const [film, setFilm] = useState<FilmInterface>({
-        id: 0,
-        actor: "", content: "", created_at: "", from: "", title: "", url: "", image: ""
+        title: "",
+        content: "",
+        author: "",
+        createdAt: "",
+        actor: "",
+        image: ""
     })
     const dispatch = useDispatch();
-
+    const loggedUser = useSelector(selectSigning)
+    const postFilm= usePostFilm()
     const handleChange = ({target}: any) => {
         setFilm(prev => ({
             ...prev,
@@ -28,9 +28,7 @@ export default function FilmForm() {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (loggedUser.token != null) {
-            dispatch(AddFilm(film))
-
-
+            postFilm(film)
         }
     }
 
@@ -38,44 +36,36 @@ export default function FilmForm() {
         <form className='mx-auto' style={{maxWidth: '350px'}} onSubmit={handleSubmit}>
             <h2 className='mb-3 text-center'>Ajouter un film</h2>
             <div className="form-floating mb-3">
-                <input type="text" className="form-control" id="floatingInput" placeholder="title"
+                <input type="text" className="form-control" id="title" placeholder="title"
                        name='title' onChange={handleChange} value={film.title}/>
-                <label htmlFor="floatingInput">Title</label>
+                <label htmlFor="title">Title</label>
             </div>
             <div className="mb-3 form-floating">
                 <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">Content</label>
+                          style={{}} onChange={handleChange} value={film.content}/>
+                <label htmlFor="floatingTextarea">Description</label>
+            </div>
+            <div className="mb-1 form-floating">
+                <textarea className="form-control" placeholder="Autheyr" id="author" name='author'
+                          style={{height: ''}} onChange={handleChange} value={film.author}/>
+                <label htmlFor="author">Par</label>
             </div>
             <div className="mb-3 form-floating">
-                <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">Par</label>
+                <input type={"date"} className="form-control" id="createdAt" name='createdAt'
+                       style={{height: ''}} onChange={handleChange} value={film.createdAt}/>
+                <label htmlFor="createdAt">sortie le </label>
             </div>
             <div className="mb-3 form-floating">
-                <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">sortie le </label>
+                <input type={"text"} className="form-control" placeholder="Write here" id="floatingTextarea"
+                       name='actor'
+                       style={{height: ''}} onChange={handleChange} value={film.actor}/>
+                <label htmlFor="floatingTextarea">avec ( séparé par une virgule)</label>
             </div>
-            <div className="mb-3 form-floating">
-                <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">avec</label>
-            </div>
-            <div className="mb-3 form-floating">
-                <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">Par</label>
-            </div>
-            <div className="mb-3 form-floating">
-                <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">Par</label>
-            </div>
-            <div className="mb-3 form-floating">
-                <textarea className="form-control" placeholder="Write here" id="floatingTextarea" name='content'
-                          style={{height: '100px'}} onChange={handleChange} value={film.content}/>
-                <label htmlFor="floatingTextarea">Par</label>
+            <div className="mb-3">
+                <label htmlFor="file">Choisir une affiche</label>
+
+                <input type={"file"} className="" placeholder="aFFICHE" id="floatingTextarea" name='image'
+                       style={{height: ''}} onChange={handleChange} value={film.image}></input>
             </div>
             <button type='submit' className='btn btn-primary w-100'>Send</button>
         </form>

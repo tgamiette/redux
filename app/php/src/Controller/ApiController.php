@@ -57,9 +57,9 @@ class ApiController extends BaseController {
 
 //Inscription
   public function postUser($params) {
-    if (isset($_POST['name']) && isset($_POST['password'])) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+      
       $user = new User($_POST);
-      $user->setJwt(base_convert(hash('sha256', time() . mt_rand()), 16, 36));
       $userManager = new UserManager();
       $result = $userManager->add($user);
       
@@ -68,11 +68,11 @@ class ApiController extends BaseController {
       }
       else {
         throw new \HttpException("Problème lors de l'ajout de la requête");
-        $this->renderJSON(["message" => "Problème lors de l'ajout", "status" => 400]);
+//        $this->renderJSON(["message" => "Problème lors de l'ajout", "status" => 400],400);
       }
     }
     else {
-      $this->renderJSON(["message" => 'il manque des popriété', "status" => 400]);
+      $this->renderJSON(["message" => 'il manque des popriété', "status" => 400],400);
     }
   }
 
@@ -80,8 +80,7 @@ class ApiController extends BaseController {
   public function postLogin($params) {
     $userManager = new UserManager();
     $user = $userManager->checkLogin($_POST);
-    if ($user) {
-      $user = new User($user);
+    if ($user instanceof User) {
       $token = (new jwtHelper())->generate($user);
       $_COOKIE['token'] = $token;
       $this->renderJSON([
@@ -92,9 +91,9 @@ class ApiController extends BaseController {
     }
     else {
       $this->renderJSON([
-        'status' => 403,
-        'message' => "connexion echoué"
-      ], 403);
+        'status' => 400,
+        'message' => "connexion echoué mot de passe ou username "
+      ], 400);
     }
   }
 
@@ -115,10 +114,10 @@ class ApiController extends BaseController {
       $token = $_COOKIE['token'];
       $user = $this->checkAccess();
       $postManager = new FilmManager();
-      $post = new Film($_POST);
-      $post->setAuthorId($user->getId());
+      $film = new Film($_POST);
+//      $film->setAuthorId($user->getId());
       
-      if ($postManager->addPost($post)) {
+      if ($postManager->addFilm($film)) {
         header("connexion Ok", true, 200);
         $this->renderJSON([
           'status' => 200,

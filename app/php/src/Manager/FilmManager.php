@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 use App\Entity\Film;
+use http\Client\Curl\User;
 
 class FilmManager extends BaseManager {
   
@@ -32,14 +33,15 @@ class FilmManager extends BaseManager {
 //  }
 //
   public function addFilm(Film $film) {
-    $sql = "INSERT INTO `comment` (`title`, `content`,`author`,`actors`,`from`,`createdAt`) VALUES (:title, :content, :author, :actors, :from, :createdAt)";
+    $sql = "INSERT INTO `film` (`title`, `content`,`author`,`actors`,`createdAt`,`image`) VALUES (:title, :content, :author, :actors, :createdAt, :image)";
     
     $request = $this->db->prepare($sql);
     $request->bindValue(':title', $film->getTitle());
     $request->bindValue(':content', $film->getContent());
-    $request->bindValue(':createdAt', (new \DateTime())->format('d-m-Y'));
-    $request->bindValue(':author', $film->getAuthor(),);
-    $request->bindValue(':actors', $film->getActors(),);
+    $request->bindValue(':createdAt', $film->getCreatedAt());
+    $request->bindValue(':author', $film->getAuthor());
+    $request->bindValue(':actors', $film->getActors());
+    $request->bindValue(':image', $film->getImage());
     
     return $request->execute();
   }

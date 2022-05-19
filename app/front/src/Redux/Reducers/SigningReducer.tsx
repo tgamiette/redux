@@ -5,8 +5,8 @@ import useLogin from "../../Hook/useLogin";
 import cookies from "universal-cookie";
 import Cookies from "universal-cookie";
 
-const LOGIN = 'sign/login'
-const LOGOUT = 'sign/logout'
+export const LOGIN = 'sign/login'
+export const LOGOUT = 'sign/logout'
 
 const userFetching = () => ({type: FETCHING})
 const userLogin = (data: Store) => ({type: LOGIN, payload: data})
@@ -16,10 +16,8 @@ const postLogin = useLogin()
 
 const initialState = {
     isLogged: false,
+    token: null
 }
-
-
-
 
 
 export default function SigningReducer(state = initialState, action: {
@@ -29,9 +27,9 @@ export default function SigningReducer(state = initialState, action: {
 
     switch (action.type) {
         case LOGIN:
-            return true
+            return {isLogged: true, token: action.payload}
         case LOGOUT:
-            return false
+            return {isLogged: false, token: null}
         default:
             return state;
     }

@@ -16,6 +16,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "../../../../../../../Library/Caches/JetBrains/PhpStorm2022.1/javascript/typings/node/17.0.34/node_modules/@types/node/globals.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

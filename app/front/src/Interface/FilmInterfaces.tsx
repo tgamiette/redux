@@ -2,7 +2,6 @@ export interface FilmInterface {
     id?: number,
     title: string,
     content: string,
-    url: string,
     author: string,
     createdAt: string,
     actor: string,

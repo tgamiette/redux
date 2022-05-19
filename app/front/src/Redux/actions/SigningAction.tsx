@@ -1,6 +1,7 @@
 import {FilmInterface} from "../../Interface/FilmInterfaces";
-import {selectSigning} from "../Selector";
-import {Store} from "redux";
+
+import * as SigningReducer from '../Reducers/SigningReducer';
+
 
 export function addFilm(film: FilmInterface) {
     return {
@@ -10,27 +11,17 @@ export function addFilm(film: FilmInterface) {
 
 }
 
-export function logout(store: Store) {
-    const status = selectSigning(store.getState().status)
-    if (status === 'pending' || status === 'updating' || status === 'logout') {
-        return false
+export function logout() {
+    return {
+        type: SigningReducer.LOGOUT,
     }
-    store.dispatch(userLogout());
-    return;
+
 }
 
-export function login(store: Store) {
-    const status = selectSigning(store.getState().status)
-    if (status === 'pending' || status === 'updating') {
-        return;
+export function logged(token: string) {
+    return {
+        type: SigningReducer.LOGIN,
+        payload: token
     }
-    store.dispatch(userFetching());
-    postLogin()
-        .then((data: any) => {
-            store.dispatch(userLogin(data));
-        })
-        .catch((error: any) => {
-            store.dispatch(userError(error));
-        })
-    return;
+
 }

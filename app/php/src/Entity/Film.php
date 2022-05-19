@@ -18,9 +18,9 @@ class Film extends BaseEntity {
   }
   
   /**
-   * @return DateTime
+   * @return string
    */
-  public function getCreatedAt(): DateTime {
+  public function getCreatedAt(): string {
     return $this->createdAt;
   }
   
@@ -30,6 +30,7 @@ class Film extends BaseEntity {
   public function setCreatedAt(string $createdAt): void {
     $this->createdAt = $createdAt;
   }
+  
   /**
    * @param DateTime $createdAt
    */
@@ -66,10 +67,10 @@ class Film extends BaseEntity {
   }
   
   /**
-   * @return string[]
+   * @return string
    */
-  public function getAuthor(): array {
-    return explode(',', $this->author);
+  public function getAuthor(): string {
+    return $this->author;
   }
   
   /**

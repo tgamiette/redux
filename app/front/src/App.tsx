@@ -15,10 +15,9 @@ import useGetFilms from "./Hook/useGetFilms";
 import jose from "jose";
 import {useDispatch, useSelector} from "react-redux";
 import FilmList from "./Components/FilmList";
-import {AddFilm} from "./Actions/FilmAction";
 import {FilmInterface} from "./Interface/FilmInterfaces";
 import * as FilmAction from "./Redux/actions/FilmAction"
-import {addAllFilm, addFilm} from "./Redux/actions/FilmAction";
+import * as SigningAction from "./Redux/actions/SigningAction"
 
 export default function App() {
     const isLogged = useSelector(state => state.SigningReducer)
@@ -30,13 +29,27 @@ export default function App() {
     // const cookies = new Cookies();
     const [localUser, setLocalUser] = useState<LocalUserInterface>({password: "", username: ""})
     // const [blogList, setBlogList] = useState<BlogInterface[]>([])
-    // const [needsLogin, setNeedsLogin] = useState<boolean>(true)
+    const [needsLogin, setNeedsLogin] = useState<boolean>(true)
     // const [needsUpdate, setNeedsUpdate] = useState<boolean>(false)
     // const [connected, setConnected] = useState<boolean>(false)
     // const [list, setList] = useState([])
     // const login = useLogin();
     // const register = useRegister();
     const getFilmList = useGetFilms();
+    const dispatch = useDispatch()
+
+
+    useEffect(() => {
+        getFilmList()
+            .then((data: SetStateAction<FilmInterface[]>) => {
+                dispatch(FilmAction.addAllFilm(data));
+            })
+    })
+    const handleDisconnect = () => {
+        dispatch(SigningAction.logout())
+    }
+
+
     //
     //
     // useEffect(() => {
@@ -82,12 +95,12 @@ export default function App() {
     //
     //
 
-    useEffect(() => {
-        getFilmList()
-            .then((data: SetStateAction<FilmInterface[]>) => {
-                dispatch(FilmAction.addAllFilm(data));
-            })
-    })
+    // useEffect(() => {
+    //     getFilmList()
+    //         .then((data: SetStateAction<FilmInterface[]>) => {
+    //             dispatch(FilmAction.addAllFilm(data));
+    //         })
+    // })
     //
     // // useEffect(() => {
     // //     const GetPost = useGetPostFrom()
@@ -106,14 +119,7 @@ export default function App() {
     // // }, [comments])
     // //
     //
-    // const handleDisconnect = () => {
-    //     setLoggedUser({
-    //         status: 'error',
-    //         token: "",
-    //         username: ""
-    //     });
-    //
-    // }
+
     // return (
     //     <div className='container mt-5'>
     //         <HideIfLogged loggedUser={loggedUser}>
@@ -130,44 +136,31 @@ export default function App() {
     // )
 
 
-    const dispatch = useDispatch()
-
     const x: FilmInterface = {
+        id:56,
         title: "refugijé2",
         content: "il etait une fois",
-        url: "url",
+        image: "url",
         author: "test",
         createdAt: "2022/01/01",
         actor: "TOTO",
-        image: 'j/d/d'
     }
     const handleAddFilm = () => {
-        dispatch(addFilm(x))
+        dispatch(FilmAction.addFilm(x))
     }
 
 
     return (
         <div className='p-5'>
+            <HideIfLogged>
+                <LoginForm/>
+            </HideIfLogged>
+            <HideIfNotLogged>
+                <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
+                <FilmForm></FilmForm>
+            {/*<BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>*/}
+            </HideIfNotLogged>
             <button onClick={handleAddFilm}>Ajouter un element</button>
-            {/*<h1 className='text-center mb-5'>Tous les blogs</h1>*/}
-            {/*{localFilm.map((film) => (*/}
-            {/*    <div>*/}
-            {/*        <h3>{film.nom}</h3>*/}
-            {/*        <h3>{film.description}</h3>*/}
-            {/*        <h3>{film.link}</h3>*/}
-            {/*        <h3>{film.de}</h3>*/}
-            {/*        <h3>{film.par}</h3>*/}
-            {/*    </div>*/}
-            {/*))}*/}
-            {/*<HideIfLogged loggedUser={loggedUser}>*/}
-            {/*    <LoginForm/>*/}
-            {/*</HideIfLogged>*/}
-
-            {/*<HideIfNotLogged loggedUser={loggedUser}>*/}
-            {/*    <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>*/}
-            {/*    <BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>*/}
-            {/*</HideIfNotLogged>*/}
-
             <FilmList/>
 
         </div>
