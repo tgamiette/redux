@@ -140,7 +140,6 @@ class ApiController extends BaseController {
       $token = $_COOKIE['token'];
       $user = $this->checkAccess();
       $filmManager = new FilmManager();
-      $filmManager = new Rev();
       $film = $filmManager->getFilmById($params['id']);
       $review = new Review($_POST);
       $review->setAuthor($user);
@@ -170,7 +169,7 @@ class ApiController extends BaseController {
       $films = $filmManager->findAll();
     }
     else {
-//      $films = $filmManager->fin($id);
+      $films = $filmManager->findById($id);
     }
     if (count($films) > 0) {
       $this->renderJSON(['value' => $films, 'status' => 200, 'message' => "Récupération Ok"]);

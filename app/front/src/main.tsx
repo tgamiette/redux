@@ -1,26 +1,19 @@
-import React, {SetStateAction, useEffect, useState} from 'react'
-import ReactDOM from 'react-dom'
-import Nav from './Components/Navbar'
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-} from "react-router-dom";
+import React from 'react'
+import ReactDOM from "react-dom/client"
 import './index.css'
-import App from './App'
-
-import {Provider} from "react-redux";
 import {createStore} from "redux";
 import {RootReducer} from "./Redux/Reducers/RootReducer";
+import {Provider} from "react-redux";
+import Router from "./Router";
 
 
 export const store = createStore(RootReducer)
+const root = ReactDOM.createRoot(document.getElementById("root"))
 
-ReactDOM.render(
+root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App/>
+            <Router/>
         </Provider>
     </React.StrictMode>
-    , document.getElementById('root'));
-
+    );

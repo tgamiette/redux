@@ -20,6 +20,7 @@ export default function useLogin(): Function {
                     return true
                 }
             ).catch(error => {
+                console.log("erreur ?")
                 console.log(error)
                 return false
             });

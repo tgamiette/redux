@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {SelectFilms} from "../Redux/Selector";
 import {FilmInterface} from "../Interface/FilmInterfaces";
 import useGetFilms from "../Hook/useGetFilms";
+import {Link} from "react-router-dom";
 
 export default function Film(film) {
     return (
@@ -19,7 +20,7 @@ export default function Film(film) {
                 </small>
             </p>
 
-            <a>Voir plus</a>
+            <a><Link to={`/film/${film.film.id}`}>Voir plus</Link></a>
         </div>
     )
 }

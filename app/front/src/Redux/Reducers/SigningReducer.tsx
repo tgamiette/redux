@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css"
 import {Store} from "redux";
-import {selectSigning} from "../Selector";
+import {SelectSigning} from "../Selector";
 import useLogin from "../../Hook/useLogin";
 import cookies from "universal-cookie";
 import Cookies from "universal-cookie";

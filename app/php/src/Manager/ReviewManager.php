@@ -64,13 +64,13 @@ class ReviewManager extends BaseManager {
   }
   
   public function findAll(): array {
-    $query = $this->db->query("SELECT comment.title, comment.content, comment.date , user.name as `author` FROM comment INNER JOIN user on comment.author_id =user.id");;
+    $query = $this->db->query("SELECT comment.title, comment.content, comment.date , user.name as `author` FROM comment LEFT JOIN user on comment.author_id =user.id");;
     $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
     return $comments;
   }
   
   public function findBytoken(): array {
-    $query = $this->db->query("SELECT comment.title, comment.content, comment.date , user.name as `author` FROM comment INNER JOIN user on comment.author_id =user.id");;
+    $query = $this->db->query("SELECT comment.title, comment.content, comment.date , user.name as `author` FROM comment LEFT JOIN user on comment.author_id =user.id");;
     $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
     return $comments;
   }

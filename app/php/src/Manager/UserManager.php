@@ -55,7 +55,6 @@ class UserManager extends BaseManager {
   
   public function checkLogin(array $array) {
     $sql = "SELECT  * FROM user  WHERE (`username`=:username AND `password` = :password)";
-    
     $request = $this->db->prepare($sql);
     $request->bindValue(':username', $array['username']);
     $request->bindValue(':password', $array['password']);
@@ -65,13 +64,11 @@ class UserManager extends BaseManager {
       return new User($result);
     }
     return false;
-    
   }
   
   public function findById($idUser) {
-    $sql = "SELECT  * FROM user  WHERE `id`= :id";
+    $sql = "SELECT  * FROM user LEFT JOIN review ON user.id = review.filmID WHERE `id`= :id";
     $request = $this->db->prepare($sql);
-    
     $request->bindValue(':id', $idUser, \PDO::PARAM_INT);
     $request->execute();
     return $request->fetch(\PDO::FETCH_ASSOC);

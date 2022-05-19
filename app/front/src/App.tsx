@@ -18,6 +18,8 @@ import FilmList from "./Components/FilmList";
 import {FilmInterface} from "./Interface/FilmInterfaces";
 import * as FilmAction from "./Redux/actions/FilmAction"
 import * as SigningAction from "./Redux/actions/SigningAction"
+import {Link} from 'react-router-dom';
+
 
 export default function App() {
     const isLogged = useSelector(state => state.SigningReducer)
@@ -42,6 +44,8 @@ export default function App() {
     useEffect(() => {
         getFilmList()
             .then((data: SetStateAction<FilmInterface[]>) => {
+                console.log("data")
+                console.log(data)
                 dispatch(FilmAction.addAllFilm(data));
             })
     })
@@ -49,122 +53,36 @@ export default function App() {
         dispatch(SigningAction.logout())
     }
 
-
-    //
-    //
-    // useEffect(() => {
-    //     if (cookies.get('token') && cookies.get('hetic_username')) {
-    //         console.log('cookies exist !', loggedUser)
-    //         setLoggedUser(prev => ({
-    //             ...prev,
-    //             username: cookies.get('hetic_username'),
-    //             token: cookies.get('token')
-    //         }))
-    //     }
-    // }, [])
-    //
-    //
-    // useEffect(() => {
-    //     if (needsLogin && localUser.username !== '') {
-    //         console.log('login ?')
-    //         login(localUser.username, localUser.password)
-    //             .then((isLogged: boolean) => {
-    //                 if (isLogged) {
-    //                     console.log('tu es co')
-    //                     setLoggedUser({
-    //                         message: "none",
-    //                         status: 'success',
-    //                         username: 'toto',
-    //                         token: cookies.get('token')
-    //                     })
-    //                 }
-    //             })
-    //     } else if (!needsLogin && localUser.username !== '') {
-    //         console.log('register ?', localUser.username)
-    //         register(localUser.username, localUser.password)
-    //             .then((isRegister: any) => {
-    //                 if (isRegister) {
-    //                     // setLoggedUser(data)
-    //                 }
-    //             })
-    //     }
-    // }, [localUser])
-    //
-    //
-    // // Axios
-    //
-    //
-
-    // useEffect(() => {
-    //     getFilmList()
-    //         .then((data: SetStateAction<FilmInterface[]>) => {
-    //             dispatch(FilmAction.addAllFilm(data));
-    //         })
-    // })
-    //
-    // // useEffect(() => {
-    // //     const GetPost = useGetPostFrom()
-    // //     GetPost()
-    // //         .then((result: any) => {
-    // //             console.log(result, new Cookies().get('jwt'))
-    // //             if (result.status == 200) {
-    // //                 setList(result.value)
-    // //                 console.log("Lecture des com ok")
-    // //             } else if (result.status && result.status !== 200) {
-    // //                 console.log("Lecture des com ko")
-    // //             }
-    // //         })
-    // //         .catch((error: any) => console.log('error', error));
-    // //     // console.log(list)
-    // // }, [comments])
-    // //
-    //
-
-    // return (
-    //     <div className='container mt-5'>
-    //         <HideIfLogged loggedUser={loggedUser}>
-    //             <LoginForm setLocalUser={setLocalUser} needsLogin={needsLogin} setNeedsLogin={setNeedsLogin}/>
-    //         </HideIfLogged>
-    //
-    //         <HideIfNotLogged loggedUser={loggedUser}>
-    //             <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
-    //             <BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>
-    //         </HideIfNotLogged>
-    //
-    //         <FilmList filmList={filmList}/>
-    //     </div>
-    // )
-
-
-    const x: FilmInterface = {
-        id:56,
-        title: "refugijé2",
-        content: "il etait une fois",
-        image: "url",
-        author: "test",
-        createdAt: "2022/01/01",
-        actor: "TOTO",
-    }
-    const handleAddFilm = () => {
-        dispatch(FilmAction.addFilm(x))
-    }
-
+    // const x: FilmInterface = {
+    //     id: 56,
+    //     title: "refugijé2",
+    //     content: "il etait une fois",
+    //     image: "url",
+    //     author: "test",
+    //     createdAt: "2022/01/01",
+    //     actor: "TOTO",
+    // }
+    // const handleAddFilm = () => {
+    //     dispatch(FilmAction.addFilm(x))
+    // }
 
     return (
         <div className='p-5'>
+            <Link to="/">Home</Link> |{" "}
+            <Link to="film">Film</Link>
+
             <HideIfLogged>
                 <LoginForm/>
-            </HideIfLogged>
-            <HideIfNotLogged>
-                <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
-                <FilmForm></FilmForm>
+            </HideIfLogged><HideIfNotLogged>
+            <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
+            <FilmForm></FilmForm>
             {/*<BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>*/}
-            </HideIfNotLogged>
-            <button onClick={handleAddFilm}>Ajouter un element</button>
+        </HideIfNotLogged>
             <FilmList/>
-
         </div>
+
     );
+
 
 }
 

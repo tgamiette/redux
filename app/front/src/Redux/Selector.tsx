@@ -1,4 +1,4 @@
 
 export const SelectFilms = (state: any) => state.films;
-export const selectTheme = (state: any) => state.theme;
-export const selectSigning = (state: any) => state.signing;
+export const SelectTheme = (state: any) => state.theme;
+export const SelectSigning = (state: any) => state.signing;

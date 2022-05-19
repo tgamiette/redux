@@ -12,28 +12,10 @@ import {useDispatch} from "react-redux";
 export const ADD = 'film/add'
 export const DELETE = 'film/delete'
 export const REMPLACE = 'film/remplace'
+export const ADD_REVIEW = 'film/update'
 const getFilmList = useGetFilms();
-// const dispatch = useDispatch()
 
 const initialState: FilmInterface[] = []
-// const addFilm = () => ({type: ADD})
-// const deleteFilm = (data: any) => ({type: DELETE, payload: data})
-// const fetchFilm = (datas: any) => ({type: REMPLACE, payload: datas})
-
-// export function fetchOrUpdateFilms(store: Store) {
-//     const status = SelectFilms(store.getState().FilmReducer.status)
-//
-//     store.dispatch(filmFetching());
-//     getBlogList()
-//         .then((data: any) => {
-//             console.log(data)
-//             store.dispatch(filmResolved(data));
-//         })
-//         .catch((error: any) => {
-//             store.dispatch(filmError(error));
-//         })
-//     return;
-// }
 
 
 export default function filmReducer(state = initialState, action: {
@@ -44,6 +26,12 @@ export default function filmReducer(state = initialState, action: {
     switch (action.type) {
         case ADD:
             return [...state, action.payload]
+        case ADD_REVIEW:
+            return state.map(date => {
+                if (date.id == action.payload.id) {
+                    date.review?.push(action.payload.review)
+                }
+            })
 
         case REMPLACE: {
             return action.payload

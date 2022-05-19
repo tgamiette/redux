@@ -1,10 +1,10 @@
 import {LoginResponseInterface} from "../Interface/ResponseInterfaces";
 import {useSelector} from "react-redux";
-import {selectSigning} from "../Redux/Selector";
+import {SelectSigning} from "../Redux/Selector";
 
-export default function HideIfLogged({children}) {
+export default function HideIfLogged({children}: any) {
 
-    const loggedUser = useSelector(selectSigning)
+    const loggedUser = useSelector(SelectSigning)
     if (loggedUser.token) {
         return <></>
     }

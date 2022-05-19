@@ -4,12 +4,14 @@ export interface FilmInterface {
     content: string,
     author: string,
     createdAt: string,
-    actor: string,
-    image:string
+    actors: string,
+    image: string
+    review?: ReviewInterface[]
 }
 
 export interface ReviewInterface {
     id?: number,
     comment: string,
     note: number
+    author: string
 }

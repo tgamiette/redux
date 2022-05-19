@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {FilmInterface} from "../Interface/FilmInterfaces";
 import {useDispatch, useSelector} from "react-redux";
 import {addFilm} from "../Redux/actions/FilmAction";
-import {selectSigning} from "../Redux/Selector";
+import {SelectSigning} from "../Redux/Selector";
 import usePostFilm from "../Hook/usePostFilm";
 
 export default function FilmForm() {
@@ -16,7 +16,7 @@ export default function FilmForm() {
         image: ""
     })
     const dispatch = useDispatch();
-    const loggedUser = useSelector(selectSigning)
+    const loggedUser = useSelector(SelectSigning)
     const postFilm= usePostFilm()
     const handleChange = ({target}: any) => {
         setFilm(prev => ({

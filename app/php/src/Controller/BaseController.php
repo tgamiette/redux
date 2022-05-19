@@ -41,15 +41,13 @@ abstract class BaseController {
   
   public function checkAccess() {
     try {
-//      return new User();
-//      if (isset($_COOKIE['token'])) {
-//        $token = $_COOKIE['token'];
-//        $payloads = (new jwtHelper())->decode($token);
-//        $result = (new UserManager())->findById($payloads->id);
-//        return new User($result);
-//
-//      }
-//      return self::renderJSON("Cookie non trouve");
+      if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+        $payloads = (new jwtHelper())->decode($token);
+        $result = (new UserManager())->findById($payloads->id);
+        return new User($result);
+      }
+      return self::renderJSON("Cookie non trouve");
     }
     catch
     (ExpiredException) {

@@ -2,16 +2,16 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import API from './axios';
 
-export default function useGetFilms(): Function {
+export default function useGetFilms(id?: number): Function {
 
 
     return (): Promise<any> => {
-        return API.get('film')
+        return API.get(`film/${id}`)
             .then(response => {
-                    return response.data.value
-                }
+                console.log("response")
+                console.log(response)
+                return response.data.value}
             );
-
     }
 
 }

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {LocalUserInterface} from "../Interface/LocalUserInterface";
 import {useDispatch, useSelector} from "react-redux";
-import {selectSigning} from "../Redux/Selector";
+import {SelectSigning} from "../Redux/Selector";
 import {logged} from "../Redux/actions/SigningAction";
 import cookies from "universal-cookie";
 import Cookies from "universal-cookie";

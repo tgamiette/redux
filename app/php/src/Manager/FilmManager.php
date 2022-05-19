@@ -7,8 +7,8 @@ use http\Client\Curl\User;
 
 class FilmManager extends BaseManager {
   
-  public function getFilmById(int $id) {
-    $sql = "SELECT  * FROM `film`  WHERE (ìd = :id)";
+  public function findById(int $id) {
+    $sql = "SELECT  * FROM film LEFT JOIN review ON film.id = review.filmId WHERE `id`= :id";
     $request = $this->db->prepare($sql);
     $request->bindValue(':id', $id);
     $response = $request->execute();
@@ -47,12 +47,11 @@ class FilmManager extends BaseManager {
   }
   
   public function findAll(): array {
-    $query = $this->db->query("SELECT * FROM film ");
+    $sql = "SELECT * FROM `film` LEFT JOIN review ON film.id = review.filmId";
+  
+    $query = $this->db->query($sql);
     $films = $query->fetchAll(\PDO::FETCH_ASSOC);
     if (is_array($films)) {
-      foreach ($films as $index => $film) {
-        $films[$index] = new Film($film);
-      }
       return $films;
     }
     return false;
