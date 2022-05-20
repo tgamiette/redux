@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 20 mai 2022 à 16:49
+-- Généré le : ven. 20 mai 2022 à trop curieux :)
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 8.0.19
 
