@@ -1,7 +1,7 @@
 # exo3
-`git clone https://github.com/tgamiette/exo3.git`
+`git clone https://github.com/tgamiette/redux`
 
-`cd exo3`
+`cd redux`
 
 `make install`
 
