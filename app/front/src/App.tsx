@@ -21,14 +21,8 @@ import * as SigningAction from "./Redux/actions/SigningAction"
 import {Link} from 'react-router-dom';
 
 
-export default function App() {
-    const isLogged = useSelector(state => state.SigningReducer)
-    // const [loggedUser, setLoggedUser] = useState<LoginResponseInterface>({
-    //     status: 'error',
-    //     token: "",
-    //     username: ""
-    // })
-    // const cookies = new Cookies();
+export default function App(props) {
+    console.log(props)
     const [localUser, setLocalUser] = useState<LocalUserInterface>({password: "", username: ""})
     // const [blogList, setBlogList] = useState<BlogInterface[]>([])
     const [needsLogin, setNeedsLogin] = useState<boolean>(true)
@@ -40,7 +34,6 @@ export default function App() {
     const getFilmList = useGetFilms();
     const dispatch = useDispatch()
 
-
     useEffect(() => {
         getFilmList()
             .then((data: SetStateAction<FilmInterface[]>) => {
@@ -49,9 +42,7 @@ export default function App() {
                 dispatch(FilmAction.addAllFilm(data));
             })
     })
-    const handleDisconnect = () => {
-        dispatch(SigningAction.logout())
-    }
+
 
     // const x: FilmInterface = {
     //     id: 56,
@@ -66,6 +57,7 @@ export default function App() {
     //     dispatch(FilmAction.addFilm(x))
     // }
 
+        // console.log(`App ${theme}`)
     return (
         <div className='p-5'>
         {/*    <HideIfLogged>*/}

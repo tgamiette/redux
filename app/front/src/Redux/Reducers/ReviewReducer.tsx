@@ -3,7 +3,6 @@ import {FilmInterface, ReviewInterface} from "../../Interface/FilmInterfaces";
 
 
 export const ADD = 'review/add'
-export const ADDS = 'review/adds'
 export const DELETE = 'review/delete'
 export const REMPLACE = 'review/remplace'
 

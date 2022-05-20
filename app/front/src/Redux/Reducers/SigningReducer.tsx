@@ -8,12 +8,6 @@ import Cookies from "universal-cookie";
 export const LOGIN = 'sign/login'
 export const LOGOUT = 'sign/logout'
 
-const userFetching = () => ({type: FETCHING})
-const userLogin = (data: Store) => ({type: LOGIN, payload: data})
-const userLogout = () => ({type: LOGOUT})
-const userError = (error: any) => ({type: REJECTED, payload: error})
-const postLogin = useLogin()
-
 const initialState = {
     isLogged: false,
     token: null

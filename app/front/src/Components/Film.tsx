@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 export default function Film(film) {
     return (
-        <div className='col-sm bg-light'>
+        <div className='col-sm'>
             {/*<img src="" width=""/>*/}
             <h4>{film.film.title}</h4>
             <p>

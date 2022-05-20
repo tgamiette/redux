@@ -22,8 +22,6 @@ export default function FilmDetails() {
     useEffect(() => {
         getReviews()
             .then((reviews: ReviewInterface[]) => {
-                console.log("reviews")
-                console.log(reviews)
                 dispatch(getReviews(reviews))
             })
     }, [])
