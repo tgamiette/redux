@@ -4,12 +4,14 @@ export const basicTheme = {
     body: "#fff",
     fontColor: "#000",
     bgDiv: "#f1eeee",
+    bgNav: "#645b5b",
 };
 
 export const darkTheme = {
     body: "#363030",
     fontColor: "#868282",
     bgDiv: "#585555",
+    bgNav: "#f8f8f8"
 };
 
 
@@ -26,6 +28,9 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${props => props.theme.bgDiv}
   }
 
+  .form-control{
+    background-color: ${props => props.theme.bgNav};
+  }
   nav, textarea, input {
     background-color: ${props => props.theme.bgNav};
   }
