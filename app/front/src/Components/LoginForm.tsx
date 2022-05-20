@@ -3,10 +3,10 @@ import {LocalUserInterface} from "../Interface/LocalUserInterface";
 import {useDispatch, useSelector} from "react-redux";
 import {SelectSigning} from "../Redux/Selector";
 import {logged} from "../Redux/actions/SigningAction";
-import cookies from "universal-cookie";
 import Cookies from "universal-cookie";
 import useLogin from "../Hook/useLogin";
 import useRegister from "../Hook/useRegister";
+import {useNavigate} from 'react-router-dom'
 
 export default function LoginForm() {
     const [formInput, setFormInput] = useState<LocalUserInterface>({password: "", username: ""})
@@ -14,6 +14,9 @@ export default function LoginForm() {
     const login = useLogin()
     const register = useRegister()
     const cookies = new Cookies()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
 
     const handleChange = ({target}: any) => {
         setFormInput(prev => ({
@@ -21,8 +24,6 @@ export default function LoginForm() {
             [target.name]: target.value
         }))
     }
-
-    const dispatch = useDispatch()
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (needsLogin) {
@@ -30,6 +31,11 @@ export default function LoginForm() {
                 .then((isLogged: boolean) => {
                     if (isLogged) {
                         dispatch(logged(cookies.get('token')))
+                        navigate('/')
+                    } else {
+                        setFormInput(prevState => {
+                            return {...prevState, password: ""}
+                        })
                     }
                 })
         } else if (!needsLogin) {

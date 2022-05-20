@@ -7,6 +7,7 @@ use App\Entity\Film;
 use App\Entity\Review;
 use App\Entity\User;
 use App\Manager\FilmManager;
+use App\Manager\ReviewManager;
 use App\Manager\UserManager;
 use App\Service\jwtHelper;
 use Firebase\JWT\JWK;
@@ -72,7 +73,7 @@ class ApiController extends BaseController {
       }
     }
     else {
-      $this->renderJSON(["message" => 'il manque des popriété', "status" => 400],400);
+      $this->renderJSON(["message" => 'il manque des popriété', "status" => 400], 400);
     }
   }
 
@@ -175,6 +176,28 @@ class ApiController extends BaseController {
       $this->renderJSON(['value' => $films, 'status' => 200, 'message' => "Récupération Ok"]);
     }
     elseif (count($films) == 0) {
+      $this->renderJSON(['status' => 200, 'message' => "il n'y a rien ??"]);
+    }
+    else {
+      $this->renderJSON(['status' => 200, 'message' => "Récupération KOO"]);
+      
+    }
+  }
+  
+  public function getReview($params) {
+    
+    $idFilm = (int)$params['id'];
+    $filmManager = new ReviewManager();
+    if ($idFilm == 0) {
+      $review = $filmManager->findAll();
+    }
+    else {
+      $review = $filmManager->findByFilmId($idFilm);
+    }
+    if (count($review) > 0) {
+      $this->renderJSON(['value' => $review, 'status' => 200, 'message' => "Récupération Ok"]);
+    }
+    elseif (count($review) == 0) {
       $this->renderJSON(['status' => 200, 'message' => "il n'y a rien ??"]);
     }
     else {

@@ -17,7 +17,6 @@ export default function Router() {
     // return (
     //     // <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
     //     <BrowserRouter>
-    //         <div style={{backgroundColor: "black"}}>
     //             <Navbar/>
     //             <Routes>
     //                 <Route path="/" element={<RouteHome/>}>
@@ -31,7 +30,6 @@ export default function Router() {
     //
     //                 </Route>
     //             </Routes>
-    //         </div>
     //     </BrowserRouter>
     //     // </ThemeProvider>
     //
@@ -42,10 +40,10 @@ export default function Router() {
         <BrowserRouter>
             <Navbar/>
             <Routes>
-                <Route path="/" element={<RouteHome/>}></Route>
-                <Route path="/film" element={<FilmList/>}/>
-                {/*<Route path="/film/:filmId" element={<FilmDetails/>}/>*/}
-                <Route path="/film/addFilm" element={<FilmForm/>}/>
+                <Route path="/" element={<App/>}></Route>
+                <Route path="film" element={<FilmList/>}/>
+                <Route path="/film/:filmId" element={<FilmDetails/>}/>
+                <Route path="film/addFilm" element={<FilmForm/>}/>
                 <Route path="logout" element={<App/>}/>
                 <Route path="login" element={<LoginForm/>}/>
             </Routes>

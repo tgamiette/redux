@@ -6,7 +6,8 @@ export default function Navbar() {
     return (
         <header>
             <nav>
-                <NavLink to="film">Voir les films</NavLink>
+                <NavLink to="/">Acceuil</NavLink>
+                <NavLink to="film/:id">Voir les films</NavLink>
                 <NavLink to={'film/add'}>Ajouter un film</NavLink>
                 <NavLink to="logout">Logout</NavLink>
                 <NavLink to="login">Login</NavLink>

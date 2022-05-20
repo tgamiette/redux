@@ -1,4 +1,4 @@
-import {FilmInterface} from "../../Interface/FilmInterfaces";
+import {FilmInterface, ReviewInterface} from "../../Interface/FilmInterfaces";
 import * as FilmReducer from '../Reducers/FilmReducer';
 import {SetStateAction} from "react";
 
@@ -31,4 +31,12 @@ export function addAllFilm(films: SetStateAction<FilmInterface[]>) {
 
     }
 
+}
+
+export function addReview(review: ReviewInterface) {
+    return {
+        type: FilmReducer.ADD_REVIEW,
+        payload: review
+
+    }
 }

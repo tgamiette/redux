@@ -14,4 +14,5 @@ export interface ReviewInterface {
     comment: string,
     note: number
     author: string
+    filmId: number
 }

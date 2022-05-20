@@ -8,7 +8,7 @@ use http\Client\Curl\User;
 class FilmManager extends BaseManager {
   
   public function findById(int $id) {
-    $sql = "SELECT  * FROM film LEFT JOIN review ON film.id = review.filmId WHERE `id`= :id";
+    $sql = "SELECT * FROM film LEFT JOIN review ON film.id = review.filmId WHERE `id`= :id";
     $request = $this->db->prepare($sql);
     $request->bindValue(':id', $id);
     $response = $request->execute();
@@ -24,14 +24,7 @@ class FilmManager extends BaseManager {
     return false;
   }
 
-//  /**
-//   * @param Film $film
-//   * @return boolean|bool
-//   */
-//  public function updateFilm(Film $film,) {
-//    $sql = "INSERT INTO `comment` (`title`, `content`,`author`,`actors`,`from`,`createdAt`) VALUES (:title, :content, :author, :actors, :from, :createdAt)";
-//  }
-//
+
   public function addFilm(Film $film) {
     $sql = "INSERT INTO `film` (`title`, `content`,`author`,`actors`,`createdAt`,`image`) VALUES (:title, :content, :author, :actors, :createdAt, :image)";
     

@@ -1,25 +1,25 @@
 import React, {useState} from "react";
 
-import {FilmInterface} from "../Interface/FilmInterfaces";
+import {FilmInterface, ReviewInterface} from "../Interface/FilmInterfaces";
 import {useDispatch, useSelector} from "react-redux";
 import {addFilm} from "../Redux/actions/FilmAction";
 import {SelectSigning} from "../Redux/Selector";
 import usePostFilm from "../Hook/usePostFilm";
+import usePostReview from "../Hook/usePostReview";
 
-export default function FilmForm() {
-    const [film, setFilm] = useState<FilmInterface>({
-        title: "",
-        content: "",
-        author: "",
-        createdAt: "",
-        actor: "",
-        image: ""
+class LocalReviewInterface {
+    content: string
+}
+
+export default function ReviewForm() {
+    const [review, setReview] = useState<LocalReviewInterface>({
+        content: ""
     })
     const dispatch = useDispatch();
     const loggedUser = useSelector(SelectSigning)
-    const postFilm= usePostFilm()
+    const postFilm = usePostReview()
     const handleChange = ({target}: any) => {
-        setFilm(prev => ({
+        setReview(prev => ({
             ...prev,
             [target.name]: target.value
         }))
@@ -36,12 +36,17 @@ export default function FilmForm() {
         <form className='mx-auto' style={{maxWidth: '350px'}} onSubmit={handleSubmit}>
             <h2 className='mb-3 text-center'>Ajouter un Commentaire</h2>
             <div className="mb-3">
-                <label htmlFor="file">Choisir une affiche</label>
+                <label htmlFor="file">note sur 5 </label>
 
-                <input type={"file"} className="" placeholder="aFFICHE" id="floatingTextarea" name='image'
-                       style={{height: ''}} onChange={handleChange} value={film.image}></input>
+                <input type={"file"} className="" placeholder="aFFICHE" id="floatingTextarea" name='note'
+                       style={{height: ''}} onChange={handleChange}></input>
             </div>
-            <button type='submit' className='btn btn-primary w-100'>Send</button>
+            <div className="mb-3">
+                <label htmlFor="file">AAvis: </label>
+                <input type={"text"} className="" placeholder="Avis" id="floatingTextarea" name='content'
+                       style={{height: ''}} onChange={handleChange}></input>
+            </div>
+            <button type='submit' className='btn btn-primary w-100'>Ajouter</button>
         </form>
     )
 }

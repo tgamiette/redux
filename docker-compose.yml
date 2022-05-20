@@ -16,6 +16,8 @@ services:
       - MYSQL_ROOT_PASSWORD=azerty
       - MYSQL_USER=hetic
       - MYSQL_PASSWORD=hetic
+    ports:
+      - 3306:80
 
   phpmyadmin:
     image: phpmyadmin

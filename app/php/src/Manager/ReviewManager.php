@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 
+use App\Entity\Film;
 use App\Entity\Review;
 
 class ReviewManager extends BaseManager {
@@ -41,7 +42,7 @@ class ReviewManager extends BaseManager {
     
     return true;
   }
-  
+
 //  /**
 //   * @param Review $review
 //   * @return boolean|bool
@@ -69,10 +70,32 @@ class ReviewManager extends BaseManager {
     return $comments;
   }
   
+  
   public function findBytoken(): array {
     $query = $this->db->query("SELECT comment.title, comment.content, comment.date , user.name as `author` FROM comment LEFT JOIN user on comment.author_id =user.id");;
     $comments = $query->fetchAll(\PDO::FETCH_ASSOC);
     return $comments;
   }
   
+  public function findByFilmId(int $id) {
+    $sql = "SELECT * FROM `review` WHERE `filmId` = $id";
+    $query = $this->db->query($sql);
+    $reviews = $query->fetchAll(\PDO::FETCH_ASSOC);
+    
+    if (is_array($reviews)) {
+      return $reviews;
+    }
+    return false;
+  }
 }
+//
+//public function findAll(): array {
+//  $sql = "SELECT * FROM `film` LEFT JOIN review ON film.id = review.filmId";
+//
+//  $query = $this->db->query($sql);
+//  $films = $query->fetchAll(\PDO::FETCH_ASSOC);
+//  if (is_array($films)) {
+//    return $films;
+//  }
+//  return false;
+//}

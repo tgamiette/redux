@@ -68,16 +68,13 @@ export default function App() {
 
     return (
         <div className='p-5'>
-            <Link to="/">Home</Link> |{" "}
-            <Link to="film">Film</Link>
-
-            <HideIfLogged>
-                <LoginForm/>
-            </HideIfLogged><HideIfNotLogged>
-            <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
-            <FilmForm></FilmForm>
-            {/*<BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>*/}
-        </HideIfNotLogged>
+        {/*    <HideIfLogged>*/}
+        {/*        <LoginForm/>*/}
+        {/*    </HideIfLogged><HideIfNotLogged>*/}
+        {/*    <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>*/}
+        {/*    <FilmForm></FilmForm>*/}
+        {/*    /!*<BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>*!/*/}
+        {/*</HideIfNotLogged>*/}
             <FilmList/>
         </div>
 

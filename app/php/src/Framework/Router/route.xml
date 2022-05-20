@@ -21,6 +21,7 @@
   <!--    Api-->
   <route p="api/user" controller="ApiController" action="user" params="id"/>
   <route p="api/film" controller="ApiController" action="film" params="id"/>
+  <route p="api/review" controller="ApiController" action="review" params="id"/>
   <route p="api/login" controller="ApiController" action="login" params="id"/>
   <route p="api/post" controller="ApiController" action="Post" params="id"/>
   <route p="api/refresh" controller="ApiController" action="Refresh" params="id"/>

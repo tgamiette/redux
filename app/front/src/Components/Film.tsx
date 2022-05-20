@@ -20,7 +20,7 @@ export default function Film(film) {
                 </small>
             </p>
 
-            <a><Link to={`/film/${film.film.id}`}>Voir plus</Link></a>
+            <Link to={`/film/${film.film.id}`}>Voir plus</Link>
         </div>
     )
 }

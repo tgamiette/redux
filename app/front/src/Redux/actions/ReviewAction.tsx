@@ -1,23 +1,24 @@
+import {ReviewInterface} from "../../Interface/FilmInterfaces";
 import {FilmInterface} from "../../Interface/FilmInterfaces";
-import * as FilmReducer from '../Reducers/FilmReducer';
+import * as ReviewReducer from '../Reducers/ReviewReducer';
 
-export function addReview(film: FilmInterface) {
+export function addReview(review: any) {
     return {
-        type: FilmReducer.ADD,
-        payload: film
+        type: ReviewReducer.ADD,
+        payload: review
     }
 }
 
-export function DeleteReview(film: FilmInterface) {
+export function DeleteReview(review: ReviewInterface) {
     return {
-        type: FilmReducer.ADD,
-        payload: film
+        type: ReviewReducer.ADD,
+        payload: review
     }
 }
 
-function getReview(reviews) {
+function getReview(reviews: ReviewInterface[]) {
     return {
-        type: FilmReducer.REMPLACE,
+        type: ReviewReducer.REMPLACE,
         payload: reviews
     }
 
