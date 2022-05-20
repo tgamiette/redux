@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : ven. 20 mai 2022 à 12:06
+-- Généré le : ven. 20 mai 2022 à 16:49
 -- Version du serveur : 10.6.4-MariaDB-1:10.6.4+maria~focal
 -- Version de PHP : 8.0.19
 
@@ -42,8 +42,10 @@ CREATE TABLE `film` (
 --
 
 INSERT INTO `film` (`id`, `title`, `createdAt`, `content`, `author`, `image`, `actors`) VALUES
-(1, 'batman', '2022_01_01', 'le meilleur fil 2021', 'FRANCIS', 'src/srd/', 'on sait pas '),
-(2, 'eco', '2022-05-11', 'ecotes', 'teddy', '', 'je,fg,fds');
+(1, 'batman', '2022_01_01', 'le meilleur fil 2021', 'FRANCIS', 'batman.jpeg', 'on sait pas '),
+(2, 'eco', '2022-05-11', 'ecotes', 'teddy', 'affiche_deux.jpg', 'je,fg,fds'),
+(5, 'Man of Steel', 'no se', 'Un petit garçon découvre qu\'il possède des pouvoirs surnaturels et qu\'il n\'est pas né sur Terre. Plus tard, il s\'engage dans un périple afin de comprendre d\'où il vient et pourquoi il a été envoyé sur notre planète. ', 'Zack Snyder', 'manofsteel.jpeg', ' Henry Cavill, Amy Adams, Michael Shannon'),
+(6, 'DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS', '14/05/2022', 'Voyagez dans l’inconnu avec Doctor Strange, qui avec l’aide d’anciens et de nouveaux alliés mystiques, traverse les réalités hallucinantes et dangereuses du multivers pour affronter un nouvel adversaire mystérieux.', 'Sam Raimi', '', 'Benedict Cumberbatch, Elizabeth Olsen, Chiwetel Ejiofor');
 
 -- --------------------------------------------------------
 
@@ -130,7 +132,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `review`
