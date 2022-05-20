@@ -88,7 +88,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `fistname`, `lastname`, `email`, `password`) VALUES
-(1, 'username', NULL, NULL, NULL, 'password')
+(1, 'username', NULL, NULL, NULL, 'password');
 --
 -- Index pour les tables déchargées
 --
