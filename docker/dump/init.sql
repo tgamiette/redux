@@ -88,20 +88,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `fistname`, `lastname`, `email`, `password`) VALUES
-(1, 'username', NULL, NULL, NULL, 'password'),
-(2, 'tt', NULL, NULL, NULL, 'tt'),
-(3, 'usernameffffff', NULL, NULL, NULL, 'password'),
-(4, 'usernameffffff', NULL, NULL, NULL, 'password'),
-(5, 'username', NULL, NULL, NULL, 'password'),
-(6, 'username', NULL, NULL, NULL, 'password'),
-(7, 'username', NULL, NULL, NULL, 'password'),
-(8, 'username', NULL, NULL, NULL, 'password'),
-(9, 'username', NULL, NULL, NULL, 'password'),
-(10, 'username', NULL, NULL, NULL, 'password'),
-(11, 'username', NULL, NULL, NULL, 'password'),
-(12, 'username', NULL, NULL, NULL, 'password'),
-(13, 'username', NULL, NULL, NULL, 'password');
-
+(1, 'username', NULL, NULL, NULL, 'password')
 --
 -- Index pour les tables déchargées
 --
