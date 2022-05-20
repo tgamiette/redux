@@ -40,7 +40,7 @@ class FilmManager extends BaseManager {
   }
   
   public function findAll(): array {
-    $sql = "SELECT * FROM `film` LEFT JOIN review ON film.id = review.filmId";
+    $sql = "SELECT * FROM `film` ";
   
     $query = $this->db->query($sql);
     $films = $query->fetchAll(\PDO::FETCH_ASSOC);

@@ -34,16 +34,15 @@ export default function ReviewForm() {
 
     return (
         <form className='mx-auto' style={{maxWidth: '350px'}} onSubmit={handleSubmit}>
-            <h2 className='mb-3 text-center'>Ajouter un Commentaire</h2>
+            <h2 className='mb-3 text-center'>Ajouter une review</h2>
             <div className="mb-3">
-                <label htmlFor="file">note sur 5 </label>
-
-                <input type={"file"} className="" placeholder="aFFICHE" id="floatingTextarea" name='note'
+                <label htmlFor="file">note sur 5   </label>
+                <input type={"number"} className="form-control" placeholder="note" id="" name='note'
                        style={{height: ''}} onChange={handleChange}></input>
             </div>
             <div className="mb-3">
-                <label htmlFor="file">AAvis: </label>
-                <input type={"text"} className="" placeholder="Avis" id="floatingTextarea" name='content'
+                <label htmlFor="file">review: </label>
+                <input type={"text"} className="form-control" placeholder="Avis" id="floatingTextarea" name='content'
                        style={{height: ''}} onChange={handleChange}></input>
             </div>
             <button type='submit' className='btn btn-primary w-100'>Ajouter</button>

@@ -6,11 +6,10 @@ export default function useGetReviews(idFilm?: number): Function {
 
 
     return (): Promise<any> => {
-        console.log(`review/${idFilm}`)
         return API.get(`review/${idFilm}`)
             .then(response => {
-                console.log("response")
-                console.log(response)
+                console.log("esponse.data.value")
+                console.log(response.data.value)
                 return response.data.value}
             );
     }
